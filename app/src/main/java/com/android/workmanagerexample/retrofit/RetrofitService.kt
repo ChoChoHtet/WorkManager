@@ -1,7 +1,6 @@
 package com.android.workmanagerexample.retrofit
 
-import com.android.workmanagerexample.Joke
-import io.reactivex.Single
+import com.android.workmanagerexample.database.Joke
 import retrofit2.Call
 import retrofit2.http.GET
 

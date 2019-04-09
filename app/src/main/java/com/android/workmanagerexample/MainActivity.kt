@@ -5,12 +5,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import androidx.work.WorkManager
-import androidx.work.Worker
+import android.util.Log
+import com.android.workmanagerexample.database.JokeDatabase
 import com.android.workmanagerexample.databinding.ActivityMainBinding
 import com.android.workmanagerexample.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
@@ -26,15 +27,18 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel=viewModel
         binding.lifecycleOwner=this
         viewModel.fetchData()
-
+        val jokeDao=JokeDatabase.provideDatabase(this).getJokeDao()
         viewModel.obverseData.observe(this, Observer { workInfo ->
-            if (workInfo != null && workInfo.state.isFinished) {
+            Log.e("Size",jokeDao.sizeOfJoke().toString())
+            if (workInfo != null) {
                 binding.tvState.append("\n"+workInfo.state.name)
-                val res = workInfo.outputData.getString(TASK)
-                 val data = Utils.deserializeJson(res!!)
-                binding.tvResult.text=data.type
+                jokeDao.getAllJoke().forEach {
+                    binding.tvResult.append("\n ${it.type}")
+                }
+
             }
             binding.tvState.append("\n"+workInfo!!.state.name)
         })
+
     }
 }

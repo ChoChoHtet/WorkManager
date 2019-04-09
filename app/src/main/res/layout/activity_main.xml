@@ -15,9 +15,8 @@
 
         <TextView
                 android:id="@+id/tvResult"
-                android:layout_width="391dp"
-                android:layout_height="50dp"
-                android:text="Hello World!"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textSize="17sp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="8dp"
