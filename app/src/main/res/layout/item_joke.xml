@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="joke" type="com.android.workmanagerexample.database.Joke"/>
+    </data>
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:text="@{@string/joke_number(joke.id)}"
+                tools:text="@string/joke_number"
+                android:paddingBottom="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="@{@string/joke_type(joke.type)}"
+                tools:text="@string/joke_type"
+                android:paddingBottom="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="@{@string/joke_setup(joke.setup)}"
+                tools:text="@string/joke_setup"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="@{@string/joke_punchline(joke.punchline)}"
+                tools:text="@string/joke_punchline"
+                android:paddingTop="2dp"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</layout>

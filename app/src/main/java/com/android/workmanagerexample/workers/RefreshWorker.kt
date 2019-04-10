@@ -19,18 +19,17 @@ import com.android.workmanagerexample.retrofit.RetrofitService
 
 class RefreshWorker(context: Context, workerParameters: WorkerParameters) : Worker(context, workerParameters) {
     private lateinit var apiService: RetrofitService
-    private val outputData = Data.Builder()
-    private val db = JokeDatabase.provideDatabase(context)
+    private val db = JokeDatabase.provideDatabase(context).getJokeDao()
     override fun doWork(): Result {
-        val inputData = inputData.getString(TASK)
         Log.e("Do Work ", "Worker is working")
-        showDataUpdateNotification("Update News", "Joke data is changed")
         apiService = RetrofitCall.fetchData
         val response = apiService.getData().execute()
         if (response.isSuccessful) {
-            db.getJokeDao().addJoke(response.body()!!)
-        } else Result.failure()
-        return Result.success()
+            db.addJoke(response.body()!!)
+            showDataUpdateNotification("Update News", "New joke data is received")
+            return Result.success()
+        }
+        return Result.retry()
     }
 
     private fun showDataUpdateNotification(title: String, body: String?) {

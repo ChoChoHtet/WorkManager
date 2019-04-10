@@ -16,7 +16,7 @@ abstract class JokeDatabase : RoomDatabase() {
                 if (instance == null)
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        JokeDatabase::class.java, "weather"
+                        JokeDatabase::class.java, "joke"
                     ).allowMainThreadQueries().build()
                 return instance!!
             }

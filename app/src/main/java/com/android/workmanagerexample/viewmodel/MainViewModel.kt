@@ -2,6 +2,7 @@ package com.android.workmanagerexample.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableInt
 import android.util.Log
 import androidx.work.*
 import com.android.workmanagerexample.MainActivity.Companion.TASK
@@ -9,6 +10,7 @@ import com.android.workmanagerexample.MainActivity.Companion.UNIQUE
 import com.android.workmanagerexample.retrofit.RetrofitService
 import com.android.workmanagerexample.workers.RefreshWorker
 import java.util.concurrent.TimeUnit
+import java.util.logging.Handler
 
 class MainViewModel : ViewModel() {
     private  var workManager=WorkManager.getInstance()
@@ -16,8 +18,7 @@ class MainViewModel : ViewModel() {
     private lateinit var periodicWorkRequest: PeriodicWorkRequest
     private lateinit var oneTimeWorkRequest: OneTimeWorkRequest
     private lateinit var networkConstraint:Constraints
-    private lateinit var apiService: RetrofitService
-    private val outputData=Data.Builder()
+    val dbSize=ObservableInt()
 
     val obverseData:LiveData<WorkInfo>
     get() = workInfo
@@ -33,14 +34,14 @@ class MainViewModel : ViewModel() {
             .build()
          workManager.enqueueUniquePeriodicWork(UNIQUE,ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest)
        /* oneTimeWorkRequest= OneTimeWorkRequest.Builder(RefreshWorker::class.java)
-            .setInitialDelay(1,TimeUnit.SECONDS)
             .setConstraints(networkConstraint)
-            .build()*/
+            .build()
+        workManager.enqueue(oneTimeWorkRequest)*/
         workInfo=workManager.getWorkInfoByIdLiveData(periodicWorkRequest.id)
-        //workManager.enqueue(oneTimeWorkRequest)
+
+
     }
 
     fun btnRefresh(){
-       fetchData()
     }
 }

@@ -7,5 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 data class Joke(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val type: String
+    val type: String?,
+    val setup:String?,
+    val punchline:String?
 )

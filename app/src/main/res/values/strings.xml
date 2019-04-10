@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">workmanagerexample</string>
+    <string name="app_name">JOKE</string>
+    <string name="txt_wait_time">No Data at the moment.\n Please Wait for 15 minutes.</string>
+    <string name="joke_number">Number: %1$s</string>
+    <string name="joke_type">Type: %1$s</string>
+    <string name="joke_setup">Setup: %1$s</string>
+    <string name="joke_punchline">Punchline: %1$s</string>
 </resources>
